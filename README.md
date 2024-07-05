@@ -24,16 +24,18 @@ Este projeto implementa um sistema de reconhecimento facial utilizando Python, O
 
 2. Crie um ambiente virtual e ative-o:
     bash
+   
     python -m venv venv
+   
     source venv/bin/activate  # Para Windows: venv\Scripts\activate
     
 
-3. Instale as dependências:
+4. Instale as dependências:
     bash
     pip install -r requirements.txt
     
 
-4. Configure os diretórios e arquivos necessários:
+5. Configure os diretórios e arquivos necessários:
     - Certifique-se de que o diretório faces/ existe no caminho correto.
     - Insira os arquivos Haar Cascade para detecção de rosto no local especificado no código (haarcascade_frontalface_default.xml).
 
