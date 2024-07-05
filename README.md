@@ -18,24 +18,29 @@ Este projeto implementa um sistema de reconhecimento facial utilizando Python, O
 
 1. Clone o repositório:
     bash
+   
     git clone https://github.com/MatheusBarbosa01/facial-recognition-AI-3.git
+   
     cd python-recognition-opencv-main
     
 
-2. Crie um ambiente virtual e ative-o:
+3. Crie um ambiente virtual e ative-o:
     bash
    
     python -m venv venv
    
-    source venv/bin/activate  # Para Windows: venv\Scripts\activate
+    source venv/bin/activate
+
+   # Para Windows: venv\Scripts\activate
     
 
 4. Instale as dependências:
     bash
+   
     pip install -r requirements.txt
     
 
-5. Configure os diretórios e arquivos necessários:
+6. Configure os diretórios e arquivos necessários:
     - Certifique-se de que o diretório faces/ existe no caminho correto.
     - Insira os arquivos Haar Cascade para detecção de rosto no local especificado no código (haarcascade_frontalface_default.xml).
 
