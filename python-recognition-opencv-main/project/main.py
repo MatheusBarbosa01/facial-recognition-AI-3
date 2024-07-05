@@ -13,20 +13,22 @@ from kivy.graphics.texture import Texture
 import cv2
 import os
 import json
+from datetime import datetime
 
 # Configurações iniciais da janela Kivy
 Window.clearcolor = (1, 1, 1, 1)
 Window.size = (980, 720)
 
 # Caminho para salvar os dados dos usuários
-data_path = 'L:/python-recognition-opencv-main/python-recognition-opencv-main/faces/'
+data_path = 'C:/Users/marco/Downloads/facial-recognition-AI-3-main/facial-recognition-AI-3-main/python-recognition-opencv-main/faces'
 
 # Função para salvar os dados do usuário
 def salvar_dados_usuario(nome, cpf, senha):
     user_data = {
         'nome': nome,
         'cpf': cpf,
-        'senha': senha
+        'senha': senha,
+        'data_hora_cadastro': datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     }
     with open(os.path.join(data_path, f'{cpf}.json'), 'w') as f:
         json.dump(user_data, f)
@@ -42,7 +44,7 @@ class KivyCV(Image):
         ret, frame = self.capture.read()
         if ret:
             gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-            faceCascade = cv2.CascadeClassifier(r'L:\python-recognition-opencv-main\.venv\Lib\haarcascade_frontalface_default.xml')
+            faceCascade = cv2.CascadeClassifier(r'C:\\Users\\marco\\Downloads\\facial-recognition-AI-3-main\\facial-recognition-AI-3-main\\.venv\\Lib\\haarcascade_frontalface_default.xml')
             faces = faceCascade.detectMultiScale(gray, scaleFactor=1.3, minNeighbors=5, minSize=(30, 30))
 
             for (x, y, w, h) in faces:
@@ -67,29 +69,29 @@ class TelaInicial(Screen):
         super().__init__(**kwargs)
         layout = FloatLayout()
 
-        self.logo = Image(source="L:\python-recognition-opencv-main\python-recognition-opencv-main\images\icev_logo.png")
-        self.logo.size_hint = (0.2, 0.2)
-        self.logo.pos_hint = {'x': 0.4, 'top': 1}
+        self.logo = Image(source="C:/Users/marco/Downloads/facial-recognition-AI-3-main/facial-recognition-AI-3-main/python-recognition-opencv-main/images/icev_logo.png")
+        self.logo.size_hint = (0.15, 0.15)
+        self.logo.pos_hint = {'x': 0.4, 'top': 0.98}
 
         self.title = Label(text='Reconhecimento Facial', font_size='30sp', color=[0.031, 0.102, 0.227, 1],
-                           font_name="L:/Oslo-Black.ttf", size_hint=(.99, .99), pos_hint={'x': .0, 'y': .29})
+                           font_name=r"C:\\Users\\marco\\Downloads\\font\\Oslo-Black.ttf", size_hint=(.99, .99), pos_hint={'x': .0, 'y': .27})
 
         FOTO = Button(text='FOTOS', on_press=self.ir_para_tela_funcao)
         CADASTRAR = Button(text='CADASTRAR', on_press=self.cadastrar_usuario)
 
-        self.caixa_cpf = Label(text="CPF:", size_hint=(.005, .07), color=[0.467, 0.467, 0.467, 1],
-                               font_size=26, pos_hint={'x': .21, 'y': .62})
-        self.cpf = RoundedTextInput(multiline=False, size_hint=(.4, .07), font_size=26, pos_hint={'x': .30, 'y': .62})
+        self.caixa_cpf = Label(text="CPF:", size_hint=(.005, .07), color=[0, 0, 0, 1], 
+                               font_size=26, pos_hint={'x': .21, 'y': .52})
+        self.cpf = RoundedTextInput(multiline=False, size_hint=(.4, .07), font_size=26, pos_hint={'x': .30, 'y': .52})
 
-        self.caixa_senha = Label(text="Senha:", size_hint=(.005, .07), color=[0.467, 0.467, 0.467, 1],
-                                 font_size=26, pos_hint={'x': .21, 'y': .48})
-        self.senha = RoundedTextInput(multiline=False, size_hint=(.4, .07), font_size=26, pos_hint={'x': .30, 'y': .48})
+        self.caixa_senha = Label(text="Senha:", size_hint=(.005, .07), color=[0, 0, 0, 1],
+                                 font_size=26, pos_hint={'x': .21, 'y': .39})
+        self.senha = RoundedTextInput(multiline=False, size_hint=(.4, .07), font_size=26, pos_hint={'x': .30, 'y': .39})
 
-        self.caixa_nome = Label(text="Nome:", size_hint=(.005, .07), color=[0.467, 0.467, 0.467, 1],
-                                font_size=26, pos_hint={'x': .21, 'y': .74})
-        self.nome = RoundedTextInput(multiline=False, size_hint=(.4, .07), font_size=26, pos_hint={'x': .30, 'y': .74})
+        self.caixa_nome = Label(text="Nome:", size_hint=(.005, .07), color=[0, 0, 0, 1], 
+                                font_size=26, pos_hint={'x': .21, 'y': .64})
+        self.nome = RoundedTextInput(multiline=False, size_hint=(.4, .07), font_size=26, pos_hint={'x': .30, 'y': .64})
 
-        box = BoxLayout(orientation='horizontal', size_hint=(0.4, 0.2), padding=8, pos_hint={'top': 0.2, 'center_x': 0.5})
+        box = BoxLayout(orientation='horizontal', size_hint=(0.4, 0.2), padding=28, pos_hint={'top': 0.32, 'center_x': 0.5})
         box.add_widget(CADASTRAR)
         box.add_widget(FOTO)
 
@@ -151,7 +153,7 @@ class TelaFuncao(Screen):
         print('VOCÊ CLICOU NO BOTÃO TIRAR FOTOS')
 
         def extrair_face(img):
-            face_cascade = cv2.CascadeClassifier(r'L:\python-recognition-opencv-main\.venv\Lib\haarcascade_frontalface_default.xml')
+            face_cascade = cv2.CascadeClassifier(r'C:\\Users\\marco\\Downloads\\facial-recognition-AI-3-main\\facial-recognition-AI-3-main\\.venv\\Lib\\haarcascade_frontalface_default.xml')
             gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
             faces = face_cascade.detectMultiScale(gray, scaleFactor=1.3, minNeighbors=5, minSize=(30, 30))
 
